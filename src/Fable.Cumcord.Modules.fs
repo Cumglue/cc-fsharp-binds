@@ -17,7 +17,7 @@ module Webpack =
     
     let findAsync filter =
         let res = findAsyncRaw filter false
-        res[0] :?> Async<obj>, res[1] :?> unit -> unit
+        res.[0] :?> Async<obj>, res.[1] :?> unit -> unit
     
     [<ImportMember("@cumcord/modules/webpack")>]
     let findByDisplayName: string -> bool -> option<obj> = jsNative
