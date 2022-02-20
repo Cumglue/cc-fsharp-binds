@@ -1,3 +1,7 @@
+### 1.2.0
+- So those 1.1.0 ops were useless, use the Fable.JsInterop ones
+- Switched out all `Async<>`s for `JS.Promise<>`s, happy `promise {}`ing!
+
 ### 1.1.0
 - Added the dynamic get (?) and set (?<-) operators to ease in use of webpack modules
 
