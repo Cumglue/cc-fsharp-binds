@@ -20,28 +20,38 @@ type NestEventType =
     | DELETE
     | UPDATE
 
-type NestEmitData<'a> = {path: string []; value: 'a}
+type NestEmitData<'a> = { path: string []; value: 'a }
 
 type NestListeners =
-    {DELETE: HashSet<JsFunc>
-     GET: HashSet<JsFunc>
-     SET: HashSet<JsFunc>
-     UPDATE: HashSet<JsFunc>}
+    { DELETE: HashSet<JsFunc>
+      GET: HashSet<JsFunc>
+      SET: HashSet<JsFunc>
+      UPDATE: HashSet<JsFunc> }
 
 type Nest<'a> =
-    {delete: NestEmitData<obj> -> unit
-     emit: NestEventType -> NestEmitData<obj> -> unit
-     get: NestEmitData<obj> -> unit
-     ghost: 'a
-     listeners: NestListeners
-     off: NestEventType -> (NestEventType -> NestEmitData<obj> -> unit) -> unit
-     on: NestEventType -> (NestEventType -> NestEmitData<obj> -> unit) -> unit
-     once: NestEventType -> (NestEventType -> NestEmitData<obj> -> unit) -> unit
-     set: NestEmitData<obj> -> unit
-     store: 'a
-     update: NestEmitData<obj> -> unit}
+    { delete: NestEmitData<obj> -> unit
+      emit: NestEventType -> NestEmitData<obj> -> unit
+      get: NestEmitData<obj> -> unit
+      ghost: 'a
+      listeners: NestListeners
+      off: NestEventType -> (NestEventType -> NestEmitData<obj> -> unit) -> unit
+      on: NestEventType -> (NestEventType -> NestEmitData<obj> -> unit) -> unit
+      once: NestEventType -> (NestEventType -> NestEmitData<obj> -> unit) -> unit
+      set: NestEmitData<obj> -> unit
+      store: 'a
+      update: NestEmitData<obj> -> unit }
 
 let nullOrCall func x =
     match x with
     | Some y -> Some(func y)
     | None -> None
+
+let (?) this prop : 'a =
+    this
+        .GetType()
+        .GetProperty(prop)
+        .GetValue(this, null)
+    :?> 'a
+
+let (?<-) this prop value =
+    this.GetType().GetProperty(prop).SetValue(this, value, null)
