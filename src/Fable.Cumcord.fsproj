@@ -8,7 +8,7 @@
     </PropertyGroup>
     <ItemGroup>
         <Compile Include="Util.fs" />
-        <Compile Include="Fable.Cumcord.fs" />
+        <Compile Include="Fable.Cumcord.TopLevel.fs" />
         <Compile Include="Fable.Cumcord.Dev.fs" />
         <Compile Include="Fable.Cumcord.Modules.fs" />
         <Compile Include="Fable.Cumcord.Patcher.fs" />

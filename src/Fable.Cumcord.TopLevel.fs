@@ -1,4 +1,4 @@
-module Fable.Cumcord
+module Fable.Cumcord.TopLevel
 
 open Fable.Core
 open Fable.Cumcord.Util
