@@ -1,0 +1,24 @@
+<Project>
+    <!-- NuGet Metadata -->
+    <PropertyGroup>
+        <PackageProjectUrl>https://github.com/cumglue</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/cumglue/cc-fsharp-binds</RepositoryUrl>
+        <PackageLicenseFile>UNLICENSE</PackageLicenseFile>
+        <PackageIcon>cumglue.png</PackageIcon>
+        <PackageTags>fsharp;fable;javascript;f#;js;discord</PackageTags>
+        <Authors>Cumcord Team</Authors>
+
+        <!-- For SourceLink. See: https://github.com/dotnet/sourcelink#using-source-link-in-net-projects -->
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="$(MSBuildThisFileDirectory)\cumglue.png" Pack="true" Visible="false" PackagePath="" />
+        <None Include="$(MSBuildThisFileDirectory)\UNLICENSE" Visible="false" Pack="true" PackagePath="" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    </ItemGroup>
+</Project>

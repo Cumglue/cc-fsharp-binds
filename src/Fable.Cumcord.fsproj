@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Version>7.4.3</Version>
+    <PackageVersion>7.4.3</PackageVersion>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <!-- <DefineConstants>$(DefineConstants);FABLE_COMPILER</DefineConstants> -->
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Fable.Cumcord.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="*.fsproj; *.fs" PackagePath="fable\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Fable.Core" Version="3.2.7" />
+    <PackageReference Include="Fable.Browser.Dom" Version="2.4.4" />
+    <PackageReference Update="FSharp.Core" Version="4.7.2" />
+  </ItemGroup>
+</Project>
