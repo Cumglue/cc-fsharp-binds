@@ -45,13 +45,3 @@ let nullOrCall func x =
     match x with
     | Some y -> Some(func y)
     | None -> None
-
-let (?) this prop : 'a =
-    this
-        .GetType()
-        .GetProperty(prop)
-        .GetValue(this, null)
-    :?> 'a
-
-let (?<-) this prop value =
-    this.GetType().GetProperty(prop).SetValue(this, value, null)
