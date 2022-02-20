@@ -10,7 +10,7 @@ let copyText: string -> unit = jsNative
 [<ImportMember("@cumcord/utils")>]
 let findInReactTree: obj -> (obj -> bool) -> obj = jsNative
 
-type FindInTreeOptionsRaw =
+type private FindInTreeOptionsRaw =
     {walkable: option<string []>
      ignore: option<string []>
      limit: option<int>}

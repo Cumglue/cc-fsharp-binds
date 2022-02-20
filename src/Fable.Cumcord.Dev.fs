@@ -3,7 +3,7 @@ module Fable.Cumcord.Dev
 open Fable.Core
 open Fable.Cumcord.Util
 
-type DevContents =
+type private DevContents =
     {isEnabled: bool
      showSettings: unit -> unit
      storage: obj
