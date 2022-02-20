@@ -10,14 +10,26 @@ let copyText: string -> unit = jsNative
 [<ImportMember("@cumcord/utils")>]
 let findInReactTree: obj -> (obj -> bool) -> obj = jsNative
 
-type FindInTreeOptions = {
-    walkable: option<string[]>
-    ignore: option<string[]>
-    limit: option<int>
-}
+type FindInTreeOptionsRaw =
+    {walkable: option<string []>
+     ignore: option<string []>
+     limit: option<int>}
 
-[<ImportMember("@cumcord/utils")>]
-let findInTree: obj -> (obj -> bool) -> option<FindInTreeOptions> -> obj = jsNative
+type FindInTreeOptions =
+    {walkable: option<string list>
+     ignore: option<string list>
+     limit: option<int>}
+
+[<Import("findInTree", from = "@cumcord/utils")>]
+let private findInTreeRaw: obj -> (obj -> bool) -> option<FindInTreeOptionsRaw> -> obj = jsNative
+
+let private rawifyTreeOptions options : FindInTreeOptionsRaw =
+    {walkable = nullOrCall List.toArray options.walkable
+     ignore = nullOrCall List.toArray options.ignore
+     limit = options.limit}
+
+let findRaw node filter options =
+    findInTreeRaw node filter (nullOrCall rawifyTreeOptions options)
 
 [<ImportMember("@cumcord/utils")>]
 let getOwnerInstance: obj -> obj = jsNative
@@ -34,9 +46,9 @@ let useNest<'a> : Nest<'a> -> unit = jsNative
 module Logger =
     [<ImportMember("@cumcord/utils/logger")>]
     let log: string -> unit = jsNative
-    
+
     [<ImportMember("@cumcord/utils/logger")>]
     let warn: string -> unit = jsNative
-    
+
     [<ImportMember("@cumcord/utils/logger")>]
     let error: string -> unit = jsNative

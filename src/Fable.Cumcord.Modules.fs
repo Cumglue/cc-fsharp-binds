@@ -8,8 +8,9 @@ module Webpack =
     [<ImportMember("@cumcord/modules/webpack")>]
     let find: (obj -> bool) -> option<obj> = jsNative
     
-    [<ImportMember("@cumcord/modules/webpack")>]
-    let findAll: (obj -> bool) -> obj[] = jsNative
+    [<Import("findAll", from = "@cumcord/modules/webpack")>]
+    let private findAllRaw: (obj -> bool) -> obj[] = jsNative
+    let findAll = findAllRaw >> Array.toList
     
     [<ImportMember("@cumcord/modules/webpack")>]
     let private findAsyncRaw: (unit -> option<obj>) -> bool -> obj[] = jsNative
@@ -21,23 +22,29 @@ module Webpack =
     [<ImportMember("@cumcord/modules/webpack")>]
     let findByDisplayName: string -> bool -> option<obj> = jsNative
     
-    [<ImportMember("@cumcord/modules/webpack")>]
-    let findByDisplayNameAll: string -> obj[] = jsNative
+    [<Import("findByDisplayNameAll", from = "@cumcord/modules/webpack")>]
+    let private findByDisplayNameAllRaw: string -> obj[] = jsNative
+    let findByDisplayNameAll = findByDisplayNameAllRaw >> Array.toList
     
-    [<ImportMember("@cumcord/modules/webpack")>]
-    let findByKeywordAll: string -> obj[] = jsNative
+    [<Import("findByKeywordAll", from = "@cumcord/modules/webpack")>]
+    let private findByKeywordAllRaw: string -> obj[] = jsNative
+    let findByKeywordAll = findByKeywordAllRaw >> Array.toList
     
-    [<ImportMember("@cumcord/modules/webpack")>]
-    let findByProps: string[] -> option<obj> = jsNative
+    [<Import("findByProps", from = "@cumcord/modules/webpack")>]
+    let private findByPropsRaw: string[] -> option<obj> = jsNative
+    let findByProps = List.toArray >> findByPropsRaw
     
-    [<ImportMember("@cumcord/modules/webpack")>]
-    let findByPropsAll: string[] -> obj[] = jsNative
+    [<Import("findByPropsAll", from = "@cumcord/modules/webpack")>]
+    let private findByPropsAllRaw: string[] -> obj[] = jsNative
+    let findByPropsAll = List.toArray >> findByPropsAllRaw >> Array.toList
     
-    [<ImportMember("@cumcord/modules/webpack")>]
-    let findByPrototypes: string[] -> option<obj> = jsNative
+    [<Import("findByPrototypes", from = "@cumcord/modules/webpack")>]
+    let private findByPrototypesRaw: string[] -> option<obj> = jsNative
+    let findByPrototypes = List.toArray >> findByPrototypesRaw
     
-    [<ImportMember("@cumcord/modules/webpack")>]
-    let findByStrings: string[] -> option<obj> = jsNative
+    [<Import("findByStrings", from = "@cumcord/modules/webpack")>]
+    let private findByStringsRaw: string[] -> option<obj> = jsNative
+    let findByStrings = List.toArray >> findByStringsRaw
     
 module Common =
     [<ImportMember("@cumcord/modules/common")>]
