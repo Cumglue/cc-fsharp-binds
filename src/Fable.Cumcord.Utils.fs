@@ -2,6 +2,7 @@ module Fable.Cumcord.Utils
 
 open Browser.Types
 open Fable.Core
+open Fable.Core.JS
 open Fable.Cumcord.Util
 
 [<ImportMember("@cumcord/utils")>]
@@ -38,7 +39,7 @@ let getOwnerInstance: obj -> obj = jsNative
 let getReactInstance: HTMLElement -> obj = jsNative
 
 [<ImportMember("@cumcord/utils")>]
-let sleep: int -> Async<unit> = jsNative
+let sleep: int -> Promise<unit> = jsNative
 
 [<ImportMember("@cumcord/utils")>]
 let useNest<'a> : Nest<'a> -> unit = jsNative

@@ -1,6 +1,7 @@
 namespace Fable.Cumcord.Ui
 
 open Fable.Core
+open Fable.Core.JS
 open Fable.Core.JsInterop
 
 module Components =
@@ -16,7 +17,7 @@ module Modals =
     }
     
     [<ImportMember("@cumcord/ui/modals")>]
-    let showConfirmationModal: ConfirmationModalOptions -> Async<bool> = jsNative
+    let showConfirmationModal: ConfirmationModalOptions -> Promise<bool> = jsNative
 
 module Toasts =
     type ToastOptions = {

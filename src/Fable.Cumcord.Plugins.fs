@@ -1,6 +1,7 @@
 module Fable.Cumcord.Plugins
 
 open Fable.Core
+open Fable.Core.JS
 open Fable.Cumcord.Util
 
 (*type PluginManifest = {
@@ -25,7 +26,7 @@ type LoadedNestValue = {
 }*)
 
 [<ImportMember("@cumcord/plugins")>]
-let importPlugins: string -> Async<unit> = jsNative
+let importPlugins: string -> Promise<unit> = jsNative
 
 [<ImportMember("@cumcord/plugins")>]
 let installed: Nest<obj> = jsNative

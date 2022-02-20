@@ -13,11 +13,7 @@ module Webpack =
     let findAll = findAllRaw >> Array.toList
     
     [<ImportMember("@cumcord/modules/webpack")>]
-    let private findAsyncRaw: (unit -> option<obj>) -> bool -> obj[] = jsNative
-    
-    let findAsync filter =
-        let res = findAsyncRaw filter false
-        res.[0] :?> Async<obj>, res.[1] :?> unit -> unit
+    let findAsync: (unit -> option<obj>) -> bool -> (JS.Promise<obj> * unit -> unit) = jsNative
     
     [<ImportMember("@cumcord/modules/webpack")>]
     let findByDisplayName: string -> bool -> option<obj> = jsNative
@@ -97,7 +93,7 @@ module Internal =
     
     module IdbKeyval =
         [<ImportMember("@cumcord/modules/internal/idbKeyval")>]
-        let get: string -> Async<option<obj>> = jsNative
+        let get: string -> JS.Promise<option<obj>> = jsNative
         
         [<ImportMember("@cumcord/modules/internal/idbKeyval")>]
-        let set: string -> option<obj> -> Async<unit> = jsNative
+        let set: string -> option<obj> -> JS.Promise<unit> = jsNative
