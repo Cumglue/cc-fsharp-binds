@@ -40,8 +40,3 @@ type Nest<'a> =
       set: NestEmitData<obj> -> unit
       store: 'a
       update: NestEmitData<obj> -> unit }
-
-let nullOrCall func x =
-    match x with
-    | Some y -> Some(func y)
-    | None -> None

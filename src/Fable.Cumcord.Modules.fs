@@ -12,11 +12,13 @@ module Webpack =
     let private findAllRaw: (obj -> bool) -> obj[] = jsNative
     let findAll = findAllRaw >> Array.toList
     
-    [<ImportMember("@cumcord/modules/webpack")>]
-    let findAsync: (unit -> option<obj>) -> bool -> (JS.Promise<obj> * unit -> unit) = jsNative
+    [<Import("findAsync", from = "@cumcord/modules/webpack")>]
+    let private findAsyncRaw: (unit -> option<obj>) * bool -> (JS.Promise<obj> * unit -> unit) = jsNative
+    let findAsync finder = findAsyncRaw (finder, false)
     
-    [<ImportMember("@cumcord/modules/webpack")>]
-    let findByDisplayName: string -> bool -> option<obj> = jsNative
+    [<Import("findByDisplayName", from = "@cumcord/modules/webpack")>]
+    let private findByDisplayNameRaw: string * bool -> option<obj> = jsNative
+    let findByDisplayName name parent = findByDisplayNameRaw (name, parent)
     
     [<Import("findByDisplayNameAll", from = "@cumcord/modules/webpack")>]
     let private findByDisplayNameAllRaw: string -> obj[] = jsNative
@@ -41,7 +43,7 @@ module Webpack =
     [<Import("findByStrings", from = "@cumcord/modules/webpack")>]
     let private findByStringsRaw: string[] -> option<obj> = jsNative
     let findByStrings = List.toArray >> findByStringsRaw
-    
+
 module Common =
     [<ImportMember("@cumcord/modules/common")>]
     let Flux: obj = jsNative
@@ -75,7 +77,7 @@ module Common =
     
     [<ImportMember("@cumcord/modules/common")>]
     let zustand: JsFunc = jsNative
-    
+
 module Internal =
     module Nests =
         [<ImportMember("@cumcord/modules/internal/nests")>]

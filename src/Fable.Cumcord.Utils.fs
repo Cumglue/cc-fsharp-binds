@@ -25,12 +25,12 @@ type FindInTreeOptions =
 let private findInTreeRaw: obj -> (obj -> bool) -> option<FindInTreeOptionsRaw> -> obj = jsNative
 
 let private rawifyTreeOptions options : FindInTreeOptionsRaw =
-    {walkable = nullOrCall List.toArray options.walkable
-     ignore = nullOrCall List.toArray options.ignore
+    {walkable = Option.map List.toArray options.walkable
+     ignore = Option.map List.toArray options.ignore
      limit = options.limit}
 
 let findRaw node filter options =
-    findInTreeRaw node filter (nullOrCall rawifyTreeOptions options)
+    findInTreeRaw node filter (Option.map rawifyTreeOptions options)
 
 [<ImportMember("@cumcord/utils")>]
 let getOwnerInstance: obj -> obj = jsNative
