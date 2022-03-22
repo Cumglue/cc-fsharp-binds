@@ -5,27 +5,25 @@ open Fable.Core.JsInterop
 open Fable.Cumcord.Util
 
 [<Import("after", from = "@cumcord/patcher")>]
-let private afterRaw: string * obj * (obj [] * obj -> option<obj>) * bool -> (unit -> unit) = jsNative
+let private afterRaw (_func: string) (_parent: obj) (_patch: obj [] * obj -> option<obj>) (_oneTime: bool): (unit -> unit) = jsNative
 
 let after fName fParent patch oneTime =
-    afterRaw (fName, fParent, (fun (a, r) -> patch (Array.toList a) r), oneTime)
+    afterRaw fName fParent (fun (a, r) -> patch (Array.toList a) r) oneTime
 
 [<Import("before", from = "@cumcord/patcher")>]
-let private beforeRaw: string * obj * (obj [] -> option<obj []>) * bool -> (unit -> unit) = jsNative
+let private beforeRaw (_func: string) (_parent: obj) (_patch: obj [] -> option<obj []>) (_oneTime: bool): (unit -> unit) = jsNative
 
 let before fName fParent patch oneTime =
-    beforeRaw (fName, fParent, (Array.toList >> patch >> (Option.map List.toArray)), oneTime)
-
-[<Import("findAndPatch", from = "@cumcord/patcher")>]
-let private findAndPatchRaw: (unit -> option<obj>) * (obj -> unit -> unit) -> (unit -> unit) = jsNative
-
-let findAndPatch finder patch = findAndPatchRaw (finder, patch)
+    beforeRaw fName fParent (Array.toList >> patch >> (Option.map List.toArray)) oneTime
 
 [<ImportMember("@cumcord/patcher")>]
-let injectCSS: string -> (option<string> -> unit) = jsNative
+let findAndPatch (_finder: unit -> option<obj>) (_patch: obj -> unit -> unit): (unit -> unit) = jsNative
+
+[<ImportMember("@cumcord/patcher")>]
+let injectCSS: string -> (unit -> unit) = jsNative
 
 [<Import("instead", from = "@cumcord/patcher")>]
-let private insteadRaw: string * obj * (string [] * JsFunc -> option<obj>) * bool -> (unit -> unit) = jsNative
+let private insteadRaw (_func: string) (_parent: obj) (_patch: string [] * JsFunc -> option<obj>) (_oneTime: bool): (unit -> unit) = jsNative
 
 let instead fName fParent patch oneTime =
-    insteadRaw (fName, fParent, (fun (a, f) -> patch (Array.toList a) f), oneTime)
+    insteadRaw fName fParent (fun (a, f) -> patch (Array.toList a) f) oneTime

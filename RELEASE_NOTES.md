@@ -1,3 +1,6 @@
+### 1.3.1
+- Bruh Fable's binding docs are so vague wtf
+
 ### 1.3.0
 - Fixed loads of functions being curried therefore generating broken JS
 

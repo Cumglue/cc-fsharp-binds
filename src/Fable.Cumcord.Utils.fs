@@ -6,10 +6,10 @@ open Fable.Core.JS
 open Fable.Cumcord.Util
 
 [<ImportMember("@cumcord/utils")>]
-let copyText: string -> unit = jsNative
+let copyText (_txt: string) : unit = jsNative
 
 [<ImportMember("@cumcord/utils")>]
-let findInReactTree: obj -> (obj -> bool) -> obj = jsNative
+let findInReactTree (_node: obj) (_filter: obj -> bool) : obj = jsNative
 
 type private FindInTreeOptionsRaw =
     {walkable: option<string []>
@@ -22,34 +22,34 @@ type FindInTreeOptions =
      limit: option<int>}
 
 [<Import("findInTree", from = "@cumcord/utils")>]
-let private findInTreeRaw: obj -> (obj -> bool) -> option<FindInTreeOptionsRaw> -> obj = jsNative
+let private findInTreeRaw (_node: obj) (_filter: obj -> bool) (_opts: option<FindInTreeOptionsRaw>) : obj = jsNative
 
 let private rawifyTreeOptions options : FindInTreeOptionsRaw =
     {walkable = Option.map List.toArray options.walkable
      ignore = Option.map List.toArray options.ignore
      limit = options.limit}
 
-let findRaw node filter options =
+let findInTree node filter options =
     findInTreeRaw node filter (Option.map rawifyTreeOptions options)
 
 [<ImportMember("@cumcord/utils")>]
-let getOwnerInstance: obj -> obj = jsNative
+let getOwnerInstance (_node: obj) : obj = jsNative
 
 [<ImportMember("@cumcord/utils")>]
-let getReactInstance: HTMLElement -> obj = jsNative
+let getReactInstance (_node: HTMLElement) : obj = jsNative
 
 [<ImportMember("@cumcord/utils")>]
-let sleep: int -> Promise<unit> = jsNative
+let sleep (_ms: int) : Promise<unit> = jsNative
 
 [<ImportMember("@cumcord/utils")>]
-let useNest<'a> : Nest<'a> -> unit = jsNative
+let useNest<'a> (_nest: Nest<'a>) : unit = jsNative
 
 module Logger =
     [<ImportMember("@cumcord/utils/logger")>]
-    let log: string -> unit = jsNative
+    let log (_val: obj) : unit = jsNative
 
     [<ImportMember("@cumcord/utils/logger")>]
-    let warn: string -> unit = jsNative
+    let warn (_val: obj) : unit = jsNative
 
     [<ImportMember("@cumcord/utils/logger")>]
-    let error: string -> unit = jsNative
+    let error (_val: obj) : unit = jsNative
